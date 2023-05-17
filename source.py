@@ -12,7 +12,7 @@ def main():
 
     # Input
     # Genotype input file
-    parser.add_argument("vcf", help = "Input vcf file with genotype data", type = str)
+    parser.add_argument("vcf", help = "Input unzipped vcf file with genotype data", type = str)
     # Phenotype input file
     parser.add_argument("phen", help = "Input phen file with phenotype data", type = str)
 
@@ -27,8 +27,7 @@ def main():
     vcf_reader = vcf.Reader(open(genotypes, 'r'))
     
     # Open phen file
-    phenotypes = args.phen
-    
+    phenotypes = pd.read_csv(args.phen, sep = " ", header = None)
 
     # Access header info
     header = vcf_reader.metadata
