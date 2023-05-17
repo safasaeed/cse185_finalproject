@@ -27,7 +27,7 @@ def main():
     vcf_reader = vcf.Reader(open(genotypes, 'r'))
     
     # Open phen file
-    phenotypes = pd.read_csv(args.phen, sep = " ", header = None)
+    phenotypes = pd.read_csv(args.phen, sep = "\t", header = None)
 
     # Access header info
     header = vcf_reader.metadata
@@ -39,3 +39,7 @@ def main():
         for call in record.samples:
             sample_name = call.sample
             gt = call.data.GT
+            allele1, allele2 = gt.split("|")
+            gt_val = int(allele1) + int(allele2)
+            pt = phenotypes.loc[phenotypes[0] == sample_name, 2]
+           
