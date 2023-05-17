@@ -6,8 +6,8 @@ import argparse
 
 def main():
     parser = argparse.ArgumentParser(
-      prog = "mygwas",
-      description = "Command-line script to perform GWAS linear regression"
+        prog = "mygwas",
+        description = "Command-line script to perform GWAS linear regression"
     )
 
     # Input
@@ -25,6 +25,10 @@ def main():
     # Open VCF file
     genotypes = args.vcf
     vcf_reader = vcf.Reader(open(genotypes, 'r'))
+    
+    # Open phen file
+    phenotypes = args.phen
+    
 
     # Access header info
     header = vcf_reader.metadata
@@ -32,6 +36,7 @@ def main():
 
     # Iterate over SNPs in VCF file
     for record in vcf_reader:
-       for call in record.samples:
-          sample_name = call.sample
-          gt = call.gt_bases
+        sample_data = []
+        for call in record.samples:
+            sample_name = call.sample
+            gt = call.data.GT
