@@ -35,11 +35,12 @@ def main():
 
     # Iterate over SNPs in VCF file
     for record in vcf_reader:
-        sample_data = []
+        sample_data = pd.DataFrame(columns = ['Sample', 'Genotype', 'Phenotype'])
         for call in record.samples:
             sample_name = call.sample
             gt = call.data.GT
             allele1, allele2 = gt.split("|")
             gt_val = int(allele1) + int(allele2)
-            pt = phenotypes.loc[phenotypes[0] == sample_name, 2]
+            pt = phenotypes.loc[phenotypes[0] == sample_name, 2].item()
+            sample_data = sample_data.append({'Sample' : sample_name, 'Genotype' : gt_val, 'Phenotype' : pt}, ignore_index=True)
            
