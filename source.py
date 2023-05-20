@@ -17,7 +17,7 @@ def main():
     parser.add_argument("phen", help = "Input phen file with phenotype data", type = str)
 
     # Output
-    parser.add_argument("-o", "--out", help = "Specify output file name", metavar = "FILE" type = str, required = False)
+    parser.add_argument("-o", "--out", help = "Specify output file name", metavar = "FILE", type = str, required = False)
 
     # Parse args
     args = parser.parse_args()
