@@ -1,8 +1,13 @@
+#!/usr/bin/env python
+
 import numpy as np
 import pandas as pd
 import statsmodels.api as sm
 import vcf
 import argparse
+
+import warnings
+warnings.filterwarnings('ignore')
 
 def main():
     parser = argparse.ArgumentParser(
@@ -58,3 +63,7 @@ def main():
     
     # Print GWAS results
     print(results.summary())
+
+
+if __name__ == "__main__":
+    main()
