@@ -43,4 +43,18 @@ def main():
             gt_val = int(allele1) + int(allele2)
             pt = phenotypes.loc[phenotypes[0] == sample_name, 2].item()
             sample_data = sample_data.append({'Sample' : sample_name, 'Genotype' : gt_val, 'Phenotype' : pt}, ignore_index=True)
-           
+   
+    # Convert Genotype and Phenotype columns to numeric type
+    sample_data['Genotype'] = pd.to_numeric(sample_data['Genotype'])
+    sample_data['Phenotype'] = pd.to_numeric(sample_data['Phenotype'])
+    
+    # Perform linear regression between phenotype (y) and genotype (x)
+    x = sample_data['Genotype']
+    y = sample_data['Phenotype']
+    
+    x = sm.add_constant(x)
+    model = sm.OLS(y,x)
+    results = model.fit()
+    
+    # Print GWAS results
+    print(results.summary())
