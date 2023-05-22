@@ -5,6 +5,7 @@ import pandas as pd
 import statsmodels.api as sm
 import vcf
 import argparse
+import re
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -44,7 +45,7 @@ def main():
         for call in record.samples:
             sample_name = call.sample
             gt = call.data.GT
-            allele1, allele2 = gt.split("|")
+            allele1, allele2 = re.split(r'[|:/]',gt)
             gt_val = int(allele1) + int(allele2)
             pt = phenotypes.loc[phenotypes[0] == sample_name, 2].item()
             sample_data = sample_data.append({'Sample' : sample_name, 'Genotype' : gt_val, 'Phenotype' : pt}, ignore_index=True)
