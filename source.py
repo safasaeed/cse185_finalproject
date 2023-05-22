@@ -39,17 +39,18 @@ def main():
     header = vcf_reader.metadata
     sample_names = vcf_reader.samples
 
-    # Iterate over SNPs in VCF file
-    for record in vcf_reader:
-        sample_data = pd.DataFrame(columns = ['Sample', 'Genotype', 'Phenotype'])
-        for call in record.samples:
-            sample_name = call.sample
-            gt = call.data.GT
-            allele1, allele2 = re.split(r'[|:/]',gt)
-            gt_val = int(allele1) + int(allele2)
-            pt = phenotypes.loc[phenotypes[0] == sample_name, 2].item()
-            sample_data = sample_data.append({'Sample' : sample_name, 'Genotype' : gt_val, 'Phenotype' : pt}, ignore_index=True)
-   
+# Iterate over SNPs in VCF file
+gwas_data = pd.DataFrame(columns = ['SNP', 'Chromosome', 'BP', 'P-Val'])
+for record in vcf_reader:
+    sample_data = pd.DataFrame(columns = ['Sample','Genotype', 'Phenotype'])
+    for call in record.samples:
+        sample_name = call.sample
+        gt = call.data.GT
+        allele1, allele2 = gt.split("|")
+        gt_val = int(allele1) + int(allele2)
+        pt = phenotypes.loc[phenotypes[0] == sample_name, 2].item()
+        sample_data = sample_data.append({'Sample' : sample_name, 'Genotype' : gt_val, 'Phenotype' : pt}, ignore_index=True)
+        
     # Convert Genotype and Phenotype columns to numeric type
     sample_data['Genotype'] = pd.to_numeric(sample_data['Genotype'])
     sample_data['Phenotype'] = pd.to_numeric(sample_data['Phenotype'])
@@ -62,8 +63,16 @@ def main():
     model = sm.OLS(y,x)
     results = model.fit()
     
-    # Print GWAS results
-    print(results.summary())
+    p_value = results.pvalues.values[0]
+    gwas_data = gwas_data.append({'SNP' : record.ID, 'Chromosome' : record.CHROM, 'BP' : record.POS, 'P-Val' : p_value}, ignore_index=True)
+    
+# Print GWAS results
+# print(gwas_data)
+from qqman import qqman
+fig, (ax0, ax1) = plt.subplots(1, 2, gridspec_kw={'width_ratios': [2, 1]})
+fig.set_size_inches((15, 5))
+qqman.manhattan(gwas_data, ax=ax0)
+qqman.qqplot(gwas_data, ax=ax1)
 
 
 if __name__ == "__main__":
