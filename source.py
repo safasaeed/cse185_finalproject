@@ -18,7 +18,7 @@ def main():
 
     # Input
     # Genotype input file
-    parser.add_argument("vcf", help = "Input unzipped vcf file with genotype data", type = str)
+    parser.add_argument("vcf", help = "Input vcf file with genotype data", type = str)
     # Phenotype input file
     parser.add_argument("phen", help = "Input phen file with phenotype data", type = str)
 
