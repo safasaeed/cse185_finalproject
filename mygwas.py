@@ -67,7 +67,7 @@ for record in vcf_reader:
     gwas_data = gwas_data.append({'SNP' : record.ID, 'CHR' : record.CHROM, 'BP' : record.POS, 'P' : p_value}, ignore_index=True)
     
 # Output GWAS results
-gwas_data.to_csv('out.assoc.linear', sep='\t')
+gwas_data.to_csv(args.out + '.assoc.linear', sep='\t')
 
 # Generate Manhattan and QQ Plots
 from qqman import qqman
