@@ -66,13 +66,15 @@ for record in vcf_reader:
     p_value = results.pvalues.values[1]
     gwas_data = gwas_data.append({'SNP' : record.ID, 'CHR' : record.CHROM, 'BP' : record.POS, 'P' : p_value}, ignore_index=True)
     
-# Print GWAS results
-# print(gwas_data)
+# Output GWAS results
+gwas_data.to_csv('out.assoc.linear', sep='\t')
+
+# Generate Manhattan and QQ Plots
 from qqman import qqman
 fig, (ax0, ax1) = plt.subplots(1, 2, gridspec_kw={'width_ratios': [2, 1]})
 fig.set_size_inches((15, 5))
 qqman.manhattan(gwas_data, ax=ax0)
-qqman.qqplot(gwas_data, ax=ax1)
+qqman.qqplot(gwas_data, ax=ax1,out="./QQMan.png")
 
 
 if __name__ == "__main__":
