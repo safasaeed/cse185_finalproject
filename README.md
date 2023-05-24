@@ -19,32 +19,29 @@ python setup.py install
 
 # Basic usage
 
-The basic usage of `myplink` is:
+The basic usage of `mygwas` is:
 
 ```
-//insert command line 
+//mygwas [-h] [-o FILE] vcf phen 
 ```
 
-To run `myplink` on a small test example (using files in this repo):
+To run `mygwas` on a small test example (using files in this repo):
 ```
-//insert test example line
+//mygwas simple.vcf simple.phen
 ```
 
-This should produce the output below:
-```
-//insert output 
-```
+This should produce a .assoc.linear file as output, which contains chromosome information, SNP names, and p-values.
 
 To compare to output of `plink`, run:
 ```
-//compare to lab3 and our own data 
+//plink --pheno FILE --allow-no-sex --linear --out FILE --vcf FILE
 ```
 
-# myplink options
+# mygwas options
 
-The required input to `myplink` is a VCF file (containing the SNPs for a subset of samples) and a .phen file (contains normalized melanin(?) values for each sample) 
+The required input to `mygwas` is a VCF file (containing the SNPs for a subset of samples) and a .phen file (contains normalized melanin(?) values for each sample) 
 
-* `--pheno FILE`, `--vcf FILE`: //insert info on each 
+* `pheno FILE`, `vcf FILE`: //insert info on each 
 
 * `-linear`, //insert blur 
 
