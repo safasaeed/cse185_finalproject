@@ -22,19 +22,19 @@ python setup.py install
 The basic usage of `mygwas` is:
 
 ```
-//mygwas [-h] [-o FILE] vcf phen 
+mygwas [-h] [-o FILE] vcf phen 
 ```
 
 To run `mygwas` on a small test example (using files in this repo):
 ```
-//mygwas simple.vcf simple.phen
+mygwas simple.vcf simple.phen
 ```
 
 This should produce a .assoc.linear file as output, which contains chromosome information, SNP names, and p-values.
 
 To compare to output of `plink`, run:
 ```
-//plink --pheno FILE --allow-no-sex --linear --out FILE --vcf FILE
+plink --pheno FILE --allow-no-sex --linear --out FILE --vcf FILE
 ```
 
 # mygwas options
