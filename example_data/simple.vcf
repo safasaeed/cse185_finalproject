@@ -4,3 +4,4 @@
 #CHROM  POS     ID        REF ALT    QUAL FILTER INFO  FORMAT Sample1 Sample2 Sample3
 chr1    1000    rs12345   A   G      .    .      .     GT     0|0     0|1     1|1
 chr2    2000    rs67890   C   T      .    .      .     GT     0|1     0|0     1|1
+
