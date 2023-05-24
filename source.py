@@ -63,7 +63,7 @@ for record in vcf_reader:
     model = sm.OLS(y,x)
     results = model.fit()
     
-    p_value = results.pvalues.values[0]
+    p_value = results.pvalues.values[1]
     gwas_data = gwas_data.append({'SNP' : record.ID, 'CHR' : record.CHROM, 'BP' : record.POS, 'P' : p_value}, ignore_index=True)
     
 # Print GWAS results
