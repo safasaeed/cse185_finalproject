@@ -40,13 +40,13 @@ def main():
     sample_names = vcf_reader.samples
 
 # Iterate over SNPs in VCF file
-gwas_data = pd.DataFrame(columns = ['SNP', 'Chromosome', 'BP', 'P-Val'])
+gwas_data = pd.DataFrame(columns = ['SNP', 'CHR', 'BP', 'P'])
 for record in vcf_reader:
     sample_data = pd.DataFrame(columns = ['Sample','Genotype', 'Phenotype'])
     for call in record.samples:
         sample_name = call.sample
         gt = call.data.GT
-        allele1, allele2 = re.split(r'[|/]', gt)
+        allele1, allele2 = re.split(r'[|/]',gt)
         gt_val = int(allele1) + int(allele2)
         pt = phenotypes.loc[phenotypes[0] == sample_name, 2].item()
         sample_data = sample_data.append({'Sample' : sample_name, 'Genotype' : gt_val, 'Phenotype' : pt}, ignore_index=True)
@@ -64,7 +64,7 @@ for record in vcf_reader:
     results = model.fit()
     
     p_value = results.pvalues.values[0]
-    gwas_data = gwas_data.append({'SNP' : record.ID, 'Chromosome' : record.CHROM, 'BP' : record.POS, 'P-Val' : p_value}, ignore_index=True)
+    gwas_data = gwas_data.append({'SNP' : record.ID, 'CHR' : record.CHROM, 'BP' : record.POS, 'P' : p_value}, ignore_index=True)
     
 # Print GWAS results
 # print(gwas_data)
