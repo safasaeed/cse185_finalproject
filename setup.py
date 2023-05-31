@@ -19,7 +19,7 @@ with open(os.path.join(curdir, 'mygwas/version.py'), 'w') as fout:
 setup(
     name='mygwas',
     version=VERSION,
-    description='CSE185 Demo Project',
+    description='CSE185 Final Project',
     author='Honieh Hemati, Saara Kriplani, Safa Saeed',
     author_email='hhemati@ucsd.edu', 'skriplani@ucsd.edu', 'sasaeed@ucsd.edu'
     packages=find_packages(),
