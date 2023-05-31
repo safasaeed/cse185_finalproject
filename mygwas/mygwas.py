@@ -39,17 +39,17 @@ def main():
     header = vcf_reader.metadata
     sample_names = vcf_reader.samples
 
-# Iterate over SNPs in VCF file
-gwas_data = pd.DataFrame(columns = ['SNP', 'CHR', 'BP', 'P'])
-for record in vcf_reader:
-    sample_data = pd.DataFrame(columns = ['Sample','Genotype', 'Phenotype'])
-    for call in record.samples:
-        sample_name = call.sample
-        gt = call.data.GT
-        allele1, allele2 = re.split(r'[|/]',gt)
-        gt_val = int(allele1) + int(allele2)
-        pt = phenotypes.loc[phenotypes[0] == sample_name, 2].item()
-        sample_data = sample_data.append({'Sample' : sample_name, 'Genotype' : gt_val, 'Phenotype' : pt}, ignore_index=True)
+    # Iterate over SNPs in VCF file
+    gwas_data = pd.DataFrame(columns = ['SNP', 'CHR', 'BP', 'P'])
+    for record in vcf_reader:
+        sample_data = pd.DataFrame(columns = ['Sample','Genotype', 'Phenotype'])
+        for call in record.samples:
+            sample_name = call.sample
+            gt = call.data.GT
+            allele1, allele2 = re.split(r'[|/]',gt)
+            gt_val = int(allele1) + int(allele2)
+            pt = phenotypes.loc[phenotypes[0] == sample_name, 2].item()
+            sample_data = sample_data.append({'Sample' : sample_name, 'Genotype' : gt_val, 'Phenotype' : pt}, ignore_index=True)
         
     # Convert Genotype and Phenotype columns to numeric type
     sample_data['Genotype'] = pd.to_numeric(sample_data['Genotype'])
@@ -66,15 +66,15 @@ for record in vcf_reader:
     p_value = results.pvalues.values[1]
     gwas_data = gwas_data.append({'SNP' : record.ID, 'CHR' : record.CHROM, 'BP' : record.POS, 'P' : p_value}, ignore_index=True)
     
-# Output GWAS results
-gwas_data.to_csv(args.out + '.assoc.linear', sep='\t')
+    # Output GWAS results
+    gwas_data.to_csv(args.out + '.assoc.linear', sep='\t')
 
-# Generate Manhattan and QQ Plots
-from qqman import qqman
-fig, (ax0, ax1) = plt.subplots(1, 2, gridspec_kw={'width_ratios': [2, 1]})
-fig.set_size_inches((15, 5))
-qqman.manhattan(gwas_data, ax=ax0)
-qqman.qqplot(gwas_data, ax=ax1,out="./QQMan.png")
+    # Generate Manhattan and QQ Plots
+    from qqman import qqman
+    fig, (ax0, ax1) = plt.subplots(1, 2, gridspec_kw={'width_ratios': [2, 1]})
+    fig.set_size_inches((15, 5))
+    qqman.manhattan(gwas_data, ax=ax0)
+    qqman.qqplot(gwas_data, ax=ax1,out="./QQMan.png")
 
 
 if __name__ == "__main__":
