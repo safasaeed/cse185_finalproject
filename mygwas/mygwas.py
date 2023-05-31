@@ -63,7 +63,7 @@ def main():
     model = sm.OLS(y,x)
     results = model.fit()
     
-    p_value = results.pvalues.values[1]
+    p_value = results.pvalues.loc['Genotype']
     gwas_data = gwas_data.append({'SNP' : record.ID, 'CHR' : record.CHROM, 'BP' : record.POS, 'P' : p_value}, ignore_index=True)
     
     # Output GWAS results
