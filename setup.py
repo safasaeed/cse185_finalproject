@@ -21,7 +21,7 @@ setup(
     version=VERSION,
     description='CSE185 Final Project',
     author='Honieh Hemati, Saara Kriplani, Safa Saeed',
-    author_email='hhemati@ucsd.edu', 'skriplani@ucsd.edu', 'sasaeed@ucsd.edu'
+    author_email='hhemati@ucsd.edu', 'skriplani@ucsd.edu', 'sasaeed@ucsd.edu',
     packages=find_packages(),
     entry_points={
         "console_scripts": [
