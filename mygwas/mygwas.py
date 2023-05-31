@@ -6,6 +6,7 @@ import statsmodels.api as sm
 import vcf
 import argparse
 import re
+import matplotlib.pyplot as plt
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -51,23 +52,23 @@ def main():
             pt = phenotypes.loc[phenotypes[0] == sample_name, 2].item()
             sample_data = sample_data.append({'Sample' : sample_name, 'Genotype' : gt_val, 'Phenotype' : pt}, ignore_index=True)
         
-    # Convert Genotype and Phenotype columns to numeric type
-    sample_data['Genotype'] = pd.to_numeric(sample_data['Genotype'])
-    sample_data['Phenotype'] = pd.to_numeric(sample_data['Phenotype'])
-    
-    # Perform linear regression between phenotype (y) and genotype (x)
-    x = sample_data['Genotype']
-    y = sample_data['Phenotype']
-    
-    x = sm.add_constant(x)
-    model = sm.OLS(y,x)
-    results = model.fit()
-    
-    p_value = results.pvalues.loc['Genotype']
-    gwas_data = gwas_data.append({'SNP' : record.ID, 'CHR' : record.CHROM, 'BP' : record.POS, 'P' : p_value}, ignore_index=True)
-    
-    # Output GWAS results
-    gwas_data.to_csv(args.out + '.assoc.linear', sep='\t')
+        # Convert Genotype and Phenotype columns to numeric type
+        sample_data['Genotype'] = pd.to_numeric(sample_data['Genotype'])
+        sample_data['Phenotype'] = pd.to_numeric(sample_data['Phenotype'])
+        
+        # Perform linear regression between phenotype (y) and genotype (x)
+        x = sample_data['Genotype']
+        y = sample_data['Phenotype']
+        
+        x = sm.add_constant(x)
+        model = sm.OLS(y,x)
+        results = model.fit()
+        
+        p_value = results.pvalues.loc['Genotype']
+        gwas_data = gwas_data.append({'SNP' : record.ID, 'CHR' : record.CHROM, 'BP' : record.POS, 'P' : p_value}, ignore_index=True)
+        
+        # Output GWAS results
+        gwas_data.to_csv(args.out + '.assoc.linear', sep='\t')
 
     # Generate Manhattan and QQ Plots
     from qqman import qqman
