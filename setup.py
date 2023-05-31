@@ -7,7 +7,7 @@ MAJ = 0
 MIN = 0
 REV = 0
 VERSION = '%d.%d.%d' % (MAJ, MIN, REV)
-with open(os.path.join(curdir, 'mygwas/version.py'), 'w') as fout:
+with open(os.path.join(curdir, 'version.py'), 'w') as fout:
         fout.write(
             "\n".join(["",
                        "# THIS FILE IS GENERATED FROM SETUP.PY",
@@ -21,7 +21,7 @@ setup(
     version=VERSION,
     description='CSE185 Final Project',
     author='Honieh Hemati, Saara Kriplani, Safa Saeed',
-    author_email='hhemati@ucsd.edu', 'skriplani@ucsd.edu', 'sasaeed@ucsd.edu',
+    author_email='hhemati@ucsd.edu, skriplani@ucsd.edu, sasaeed@ucsd.edu',
     packages=find_packages(),
     entry_points={
         "console_scripts": [
