@@ -9,7 +9,7 @@ Installation requires the `qqman` library to be installed in order to visualize 
 ```
 pip install --user qqman 
 ```
-Once required libraries are installed, you can install `mypileup` with the following command:
+Please download the setup.py file and the mygwas directory from this Github page. Once required libraries and files are installed, you can install `mypileup` with the following command:
 
 ```
 python setup.py install
@@ -39,7 +39,7 @@ plink --pheno FILE --allow-no-sex --linear --out FILE --vcf FILE
 
 # mygwas options
 
-The required input to `mygwas` is a VCF file (containing the SNPs for a subset of samples) and a .phen file (contains normalized melanin(?) values for each sample) 
+The required input to `mygwas` is a VCF file (containing the SNPs for a subset of samples) and a .phen file (contains normalized phenotype values for each sample) 
 
 * `pheno FILE`, `vcf FILE`: Input phenotype and VCF files 
 
@@ -48,7 +48,7 @@ The required input to `mygwas` is a VCF file (containing the SNPs for a subset o
 
 # File format
 
-The output file format is a data table as a .assoc.linear file. 
+There are two output files, a .assoc.linear file which contains the results of the linear regression and a plot named QQMan.png. 
 
 # Contributors
 
