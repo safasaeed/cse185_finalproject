@@ -48,7 +48,7 @@ The required input to `mygwas` is a VCF file (containing the SNPs for a subset o
 
 # File format
 
-There are two output files, a .assoc.linear file which contains the results of the linear regression and a plot named QQMan.png. 
+There are two output files, an .assoc.linear file which contains the results of the linear regression and a plot named QQMan.png. 
 
 # Contributors
 
