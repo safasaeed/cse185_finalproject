@@ -73,7 +73,7 @@ def main():
     else:
         gwas_data.to_csv(args.out + '.assoc.linear', sep='\t')
 
-    Generate Manhattan and QQ Plots
+    # Generate Manhattan and QQ Plots
     from qqman import qqman
     fig, (ax0, ax1) = plt.subplots(1, 2, gridspec_kw={'width_ratios': [2, 1]})
     fig.set_size_inches((15, 5))
