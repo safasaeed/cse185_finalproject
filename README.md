@@ -24,6 +24,12 @@ python setup.py install --user
 
 You may have to install other dependencies such as numpy, pandas, and statsmodels once running the mygwas command. This can be done using `pip install`.
 
+Before running make sure to export the path:
+
+```
+export PATH=$PATH:$HOME/.local/bin
+```
+
 # Basic usage
 
 The basic usage of `mygwas` is:
