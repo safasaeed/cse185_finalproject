@@ -19,7 +19,7 @@ pip install pyvcf
 Please download the setup.py file and the mygwas directory from this Github page. Once required libraries and files are installed, you can install `mypileup` with the following command:
 
 ```
-python setup.py install
+python setup.py install --user
 ```
 
 You may have to install other dependencies such as numpy, pandas, and statsmodels once running the mygwas command. This can be done using `pip install`.
