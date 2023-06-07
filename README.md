@@ -16,7 +16,7 @@ pip install setuptools==58
 pip install pyvcf
 ```
 
-Please download the setup.py file and the mygwas directory from this Github page. Once required libraries and files are installed, you can install `mypileup` with the following command:
+Please download the setup.py file and the __init__.py and mygwas.py files from the mygwas directory from this Github page. Create a directory in the folder that contains setup.py called `mygwas` and move __init__.py and mygwas.py to that directory. Once required libraries and files are installed, you can install `mypileup` with the following command:
 
 ```
 python setup.py install --user
