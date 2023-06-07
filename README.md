@@ -4,6 +4,8 @@ This is a demonstration project for CSE185. It implements the linear regression 
 
 # Installation Instructions 
 
+Currently this program runs in Jupyter Notebook. Local installation may work but you will need to make sure python is installed properly.
+
 Installation requires the `qqman` library to be installed in order to visualize plots. You can install these with `pip`:
 
 ```
