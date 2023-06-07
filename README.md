@@ -15,7 +15,7 @@ Please download the setup.py file and the mygwas directory from this Github page
 python setup.py install
 ```
 
-
+You may have to install other dependencies such as numpy and pandas once running the mygwas command. This can be done using `pip install`.
 
 # Basic usage
 
