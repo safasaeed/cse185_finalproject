@@ -9,13 +9,20 @@ Installation requires the `qqman` library to be installed in order to visualize 
 ```
 pip install --user qqman 
 ```
+Installation also requires 'PyVCF', which can be installed following the below commands:
+
+```
+pip install setuptools==58
+pip install pyvcf
+```
+
 Please download the setup.py file and the mygwas directory from this Github page. Once required libraries and files are installed, you can install `mypileup` with the following command:
 
 ```
 python setup.py install
 ```
 
-You may have to install other dependencies such as numpy and pandas once running the mygwas command. This can be done using `pip install`.
+You may have to install other dependencies such as numpy, pandas, and statsmodels once running the mygwas command. This can be done using `pip install`.
 
 # Basic usage
 
