@@ -34,7 +34,7 @@ def main():
     vcf_reader = vcf.Reader(open(genotypes, 'r'))
     
     # Open phen file
-    phenotypes = pd.read_csv(args.phen, sep = "\t", header = None)
+    phenotypes = pd.read_csv(args.phen, sep = '[ \t]', header = None)
 
     # Access header info
     header = vcf_reader.metadata
