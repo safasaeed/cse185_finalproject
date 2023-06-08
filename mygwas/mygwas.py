@@ -66,6 +66,11 @@ def main():
         
         p_value = results.pvalues.loc['Genotype']
         gwas_data = gwas_data.append({'SNP' : record.ID, 'CHR' : record.CHROM, 'BP' : record.POS, 'P' : p_value}, ignore_index=True)
+    
+    
+    # sort chromosomes in case they are out of order
+    gwas_data.CHR = gwas_data.CHR.astype(int)
+    gwas_data = gwas_data.sort_values('CHR')
         
     # Output GWAS results
     if args.out is None:
